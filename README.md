@@ -1,4 +1,4 @@
-Awesome—let’s spin up a **complete Azure Serverless project** you can drop into a repo and deploy end-to-end.
+**complete Azure Serverless project** you can drop into a repo and deploy end-to-end.
 
 This builds a small **Inventory API** on **Azure Functions (Python)** with **Cosmos DB (serverless)** + a **Queue-triggered worker** + a **Timer cleanup**. Infra is via **Terraform**; deploy via **CLI** or **GitHub Actions**.
 
