@@ -36,8 +36,10 @@ Response (JSON)
 ```
 serverless-app/
 │
-├── function_app.py
-├── requirements.txt
+├── src/
+│   └── functions/
+│       └── hello.js
+├── package.json
 └── host.json
 ```
 
@@ -47,7 +49,7 @@ serverless-app/
 
 Install:
 
-* Python 3.8+
+* Node.js 18+ (LTS recommended)
 * Azure CLI
 * Azure Functions Core Tools
 
@@ -81,8 +83,8 @@ az storage account create \
 
 ```bash
 az functionapp create \
-  --resource-group myRG \
-  --consumption-plan-location eastus \
+  --resourcenode \
+  --runtime-version 18ation eastus \
   --runtime python \
   --runtime-version 3.10 \
   --functions-version 4 \
@@ -94,32 +96,65 @@ az functionapp create \
 
 ## 🧑‍💻 Step 3: Code (Very Basic)
 
-### 📄 `function_app.py`
+### 📄 `src/functions/hello.js`
 
-```python
-import azure.functions as func
+```javascript
+const { app } = require('@azure/functions');
 
-app = func.FunctionApp()
+app.http('hello', {
+    methods: ['GET', 'POST'],
+    authLevel: 'anonymous',
+    handler: async (request, context) => {
+        context.log('HTTP trigger function processed a request.');
 
-@app.route(route="hello", methods=["GET"])
-def hello(req: func.HttpRequest) -> func.HttpResponse:
-    name = req.params.get('name')
+        const name = request.query.get('name') || await request.text() || 'World';
 
-    if not name:
-        name = "World"
-
-    return func.HttpResponse(
-        f"Hello, {name}! This is Azure Serverless.",
-        status_code=200
-    )
+        return { 
+            status: 200,
+            body: `Hello, ${name}! This is Azure Serverless.`
+        };
+    }
+});
 ```
 
 ---
 
-### 📄 `requirements.txt`
+### 📄 `package.json`
 
+```json
+{
+  "name": "azure-serverless-hello-api",
+  "version": "1.0.0",
+  "description": "Simple serverless API using Azure Functions with Node.js",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x"
+  },
+  "main": "srcInstall Dependencies & Deploy
+
+### Install Node.js dependencies:
+
+```bash
+npm install
 ```
-azure-functions
+
+### Test locally:
+
+```bash
+npm start
+```
+
+### Deploy to Azure:",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
 ```
 
 ---
@@ -128,7 +163,19 @@ azure-functions
 
 ```json
 {
-  "version": "2.0"
+  "version": "2.0",
+  "logging": {
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "maxTelemetryItemsPerSecond": 20
+      }
+    }
+  },
+  "extensionBundle": {
+    "id": "Microsoft.Azure.Functions.ExtensionBundle",
+    "version": "[4.*, 5.0.0)"
+  }
 }
 ```
 

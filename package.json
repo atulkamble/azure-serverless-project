@@ -1,0 +1,19 @@
+{
+  "name": "azure-serverless-hello-api",
+  "version": "1.0.0",
+  "description": "Simple serverless API using Azure Functions with Node.js",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x"
+  },
+  "main": "src/functions/*.js",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
