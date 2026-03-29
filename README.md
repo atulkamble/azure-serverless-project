@@ -88,6 +88,7 @@ az functionapp create \
   --functions-version 4 \
   --name my-func-app-12345 \
   --storage-account mystorage98600
+  --os-type Linux
 ```
 
 ---
