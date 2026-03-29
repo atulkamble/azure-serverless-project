@@ -71,7 +71,7 @@ az group create --name myRG --location eastus
 
 ```bash
 az storage account create \
-  --name mystorage12345 \
+  --name mystorage98600 \
   --location eastus \
   --resource-group myRG \
   --sku Standard_LRS
@@ -87,7 +87,7 @@ az functionapp create \
   --runtime-version 3.10 \
   --functions-version 4 \
   --name my-func-app-12345 \
-  --storage-account mystorage12345
+  --storage-account mystorage98600
 ```
 
 ---
