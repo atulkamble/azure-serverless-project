@@ -83,13 +83,13 @@ az storage account create \
 
 ```bash
 az functionapp create \
-  --resourcenode \
-  --runtime-version 18ation eastus \
-  --runtime python \
-  --runtime-version 3.10 \
+  --resource-group myRG \
+  --consumption-plan-location eastus \
+  --runtime node \
+  --runtime-version 24 \
   --functions-version 4 \
   --name my-func-app-12345 \
-  --storage-account mystorage98600
+  --storage-account mystorage98600 \
   --os-type Linux
 ```
 
